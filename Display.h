@@ -25,13 +25,13 @@ class Display
   public:
     Display();
     void draw();
-    
+
     void initTopBar();
     void drawInsideTemperature();
     void drawHumidity();
     void drawAtmosphericPressure();
 
-    void drawDateAndTime();
+    void drawDateAndTime(ClockData data);
 
     void drawCurrentWeather(WeatherData data);
     void drawForecastWeather(WeatherData data);
