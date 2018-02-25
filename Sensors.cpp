@@ -15,7 +15,7 @@ void Sensors::update()
   float temperature1 = this->dht.readTemperature();
   float heatIndex = this->dht.computeHeatIndex(temperature1, humidity, false);
 
-  data = SensorData(temperature1, temperature2, heatIndex, pressure, humidity);
+  this->data = SensorData(temperature1, temperature2, heatIndex, pressure, humidity);
 }
 
 SensorData Sensors::getData()

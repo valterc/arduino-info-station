@@ -1,6 +1,7 @@
 #ifndef InfoStation_h
 #define InfoStation_h
 
+#include "Logger.h"
 #include "Display.h"
 #include "Wifi.h"
 #include "Sensors.h"
@@ -13,7 +14,8 @@ class InfoStation
     Display display;
     Wifi wifi;
     Sensors sensors;
-    
+	  RTC rtc;
+	
   public:
     InfoStation();
     void run();

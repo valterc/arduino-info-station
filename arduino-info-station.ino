@@ -6,7 +6,8 @@ InfoStation* application;
 
 void setup() 
 {
-  application = new InfoStation();
+	setUpLogger()
+	application = new InfoStation();
 }
 
 void loop() 

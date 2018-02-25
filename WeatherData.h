@@ -14,12 +14,11 @@ class WeatherData
     float max;
     float current;
     String message;
+    String image;
+    boolean rain;
+    boolean snow;
   
     WeatherData();
-
-    int getImageWidth();
-    int getImageHeight();
-    int getImagePixel();
 
 };
 
