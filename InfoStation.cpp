@@ -9,7 +9,7 @@ void InfoStation::run()
   Serial.println("Reading sensors...");
   this->sensors.update();
   SensorData data = this->sensors.getData();
-this->display.draw
+  
   logInfo("Temperature1= ");
   
   //Serial.print("Temperature1= ");
@@ -27,6 +27,7 @@ this->display.draw
   this->rtc.update();
   
   ClockData clockData = this->rtc.getData();
+  this->display.drawDateAndTime(clockData);
   
   Serial.print("Year= ");
   Serial.print(clockData.getYear());
@@ -39,28 +40,8 @@ this->display.draw
   Serial.print(" Minute= ");
   Serial.println(clockData.getMinute());
   
-  String date = String();
-  
-  date += clockData.getYear();
-  date += "-";
-  
-  if (clockData.getMonth() < 10)
-  {
-    date += "0";
-  }
-  
-  date += clockData.getMonth();
-  date += "-";
-  
-  if (clockData.getDay() < 10)
-  {
-    date += "0";
-  }
-  
-  date += clockData.getDay();
-  
   Serial.print("Date as String: ");
-  Serial.println(date);
+  Serial.println(clockData.getDateString());
   
   delay(2000);
 }

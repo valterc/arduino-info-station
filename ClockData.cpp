@@ -44,4 +44,29 @@ uint8_t ClockData::getSecond()
   return this->second;
 }
 
+String ClockData::getDateString()
+{
+  String date = String();
+
+  if (this->getDay() < 10)
+  {
+    date += "0";
+  }
+  
+  date += this->getDay();
+  date += "/";
+  
+  if (this->getMonth() < 10)
+  {
+    date += "0";
+  }
+  
+  date += this->getMonth();
+  date += "/";
+  
+  date += this->getYear();
+ 
+  return date;
+}
+
 

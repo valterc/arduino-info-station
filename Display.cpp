@@ -154,6 +154,14 @@ void Display::drawForecastWeather(WeatherData data)
 
 void Display::drawDateAndTime(ClockData data)
 {
+
+  tft.fillRect(220, 7, WIDTH, 20, getColor(160, 160, 160));
+
+  tft.setFreeFont(FSS12);
+  tft.setTextSize(1);
+
+  tft.setTextColor(tft.color565(240, 240, 240));  
+  tft.drawString(data.getDateString().c_str(), 220, 7, 1);
   
 }
 

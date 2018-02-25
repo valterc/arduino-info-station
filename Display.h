@@ -3,6 +3,7 @@
 
 #include <TFT_HX8357.h>
 #include "WeatherData.h"
+#include "ClockData.h"
 
 #include <Fonts/GFXFF/FreeSansBold24pt7b.h>
 #include <Fonts/GFXFF/FreeSans9pt7b.h>
