@@ -24,6 +24,9 @@ class ClockData
     uint8_t getSecond();
 
     String getDateString();
+	String getDayMonthString();
+	String getYearString();
+    String getTimeString();
     
 };
 

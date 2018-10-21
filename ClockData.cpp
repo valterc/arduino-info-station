@@ -69,4 +69,53 @@ String ClockData::getDateString()
   return date;
 }
 
+String ClockData::getDayMonthString()
+{
+  String date = String();
+
+  if (this->getDay() < 10)
+  {
+    date += "0";
+  }
+  
+  date += this->getDay();
+  date += "/";
+  
+  if (this->getMonth() < 10)
+  {
+    date += "0";
+  }
+  
+  date += this->getMonth();
+ 
+  return date;
+}
+
+String ClockData::getYearString()
+{ 
+  return String(this->year);
+}
+
+String ClockData::getTimeString()
+{
+  String time = String();
+
+  if (this->getHour() < 10)
+  {
+    time += "0";
+  }
+  
+  time += this->getHour();
+  time += ":";
+  
+  if (this->getMinute() < 10)
+  {
+    time += "0";
+  }
+  
+  time += this->getMinute();
+ 
+  return time;
+}
+
 
