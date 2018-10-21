@@ -14,7 +14,7 @@ class RTC
   public:
     RTC();
     void update();
-    ClockData getData();
+    ClockData& getData();
 };
 
 #endif

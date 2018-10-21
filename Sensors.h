@@ -28,7 +28,7 @@ class Sensors
   public:
     Sensors();
     void update();
-    SensorData getData();
+    SensorData& getData();
 
 };
 

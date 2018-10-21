@@ -9,16 +9,16 @@ Sensors::Sensors() : dht(DHTPIN, DHTTYPE)
 void Sensors::update()
 {
   float temperature2 = this->bme.readTemperature();
-  float pressure = this->bme.readPressure() * 0.01;
+  float pressure = this->bme.readPressure() * 0.01f;
 
   float humidity = this->dht.readHumidity();
-  float temperature1 = this->dht.readTemperature();
+  float temperature1 = this->dht.readTemperature() - 4;
   float heatIndex = this->dht.computeHeatIndex(temperature1, humidity, false);
 
   this->data = SensorData(temperature1, temperature2, heatIndex, pressure, humidity);
 }
 
-SensorData Sensors::getData()
+SensorData& Sensors::getData()
 {
   return this->data;
 }

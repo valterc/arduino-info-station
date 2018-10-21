@@ -30,7 +30,6 @@ class Wifi
 	WeatherData getWeatherData();
 	ForecastData getForecastData();
 	
-	
 };
 
 #endif
