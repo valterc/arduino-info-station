@@ -5,6 +5,7 @@
 #include "Display.h"
 #include "Wifi.h"
 #include "Sensors.h"
+#include "TemperatureHistory.h"
 
 #include "RTC.h"
 
@@ -14,7 +15,8 @@ class InfoStation
     Display display;
     Wifi wifi;
     Sensors sensors;
-	  RTC rtc;
+	RTC rtc;
+	TemperatureHistory history;
 	
   public:
     InfoStation();

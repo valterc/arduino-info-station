@@ -8,21 +8,30 @@ Display::Display()
   tft.setCursor(0, 0);
   tft.fillScreen(TFT_BLACK);
 
-  initTopBar();
+  initStaticParts();
   drawCurrentWeather(WeatherData());
   drawForecastWeather(WeatherData());
 }
 
-uint16_t getColor(uint8_t red, uint8_t green, uint8_t blue){
-  return (((31*(red+4))/255)<<11) | 
-               (((63*(green+2))/255)<<5) | 
-               ((31*(blue+4))/255);
-}
-
-void Display::initTopBar()
+void Display::initStaticParts()
 {
-   tft.fillRect(0, 0, WIDTH, 40, getColor(160, 160, 160));
+   tft.fillRect(0, 0, WIDTH, 40, getColor(180, 180, 200));
+   
+   Images::renderHumidityImage(tft, 4, 13);
+   Images::renderPressureImage(tft, 135, 9);
 
+   tft.drawFastVLine(21, 50, 50, getGrayScaleColor(0xAA));
+   tft.drawFastHLine(21, 90, 360, getGrayScaleColor(0xAA));
+   
+   tft.setTextColor(getGrayScaleColor(0xAA)); 
+   tft.setFreeFont(FSS9);
+   tft.setTextSize(1);
+
+   tft.drawString("40", 0, 45, 1);
+   tft.drawString("0", 10, 80, 1);
+   
+   Images::renderThermometerImage(tft, 390, 60);
+   
 /*
    for (uint16_t i = 0 ; i <= 255 ; i += 1)
    {
@@ -79,12 +88,90 @@ void Display::initTopBar()
 */
 }
 
-void Display::drawAtmosphericPressure()
+void Display::drawAtmosphericPressure(const SensorData& data)
 {
+  tft.fillRect(20, 6, 110, 27, getColor(180, 180, 200));
+
+  tft.setTextColor(tft.color565(240, 240, 240)); 
   
+  tft.setFreeFont(FSS12);
+  tft.setTextSize(1);
+
+  String pressure = String(data.getPressure(), 1);
+  tft.drawString(pressure.c_str(), 20, 10, 1);
+  
+  tft.setFreeFont(FSS9);
+  tft.setTextSize(1);
+  
+  uint8_t x = 82;
+  if (data.getPressure() > 1000)
+  {
+     x = 95;
+  }
+  
+  tft.drawString("hPa", x, 15, 1);
 }
 
-void Display::drawCurrentWeather(WeatherData data)
+void Display::drawHumidity(const SensorData& data)
+{
+  tft.fillRect(150, 6, 65, 27, getColor(180, 180, 200));
+  tft.setTextColor(tft.color565(240, 240, 240));  
+
+  tft.setFreeFont(FSS12);
+  tft.setTextSize(1);
+
+  String pressure = String(data.getHumidity(), 1);
+  tft.drawString(pressure.c_str(), 150, 10, 1);
+  
+  tft.setFreeFont(FSS9);
+  tft.setTextSize(1);
+    
+  tft.drawString("%", 196, 15, 1);
+}
+
+void Display::drawTemperature(const TemperatureHistory& history, const SensorData& data)
+{
+	tft.fillRect(22, 50, 360, 50, getGrayScaleColor(0));
+	
+	tft.drawFastHLine(22, 60, 360, getGrayScaleColor(0x44));
+	tft.drawFastHLine(22, 70, 360, getGrayScaleColor(0x44));
+	tft.drawFastHLine(22, 80, 360, getGrayScaleColor(0x44));
+	
+	tft.drawFastHLine(21, 90, 360, getGrayScaleColor(0xAA));
+	
+	const int& index = history.getHistoryIndex();
+	const float* historyTemperatures = history.getHistory();
+	
+	for (int i = index ; i < HISTORY_POINTS ; ++i)
+	{
+		float temp = historyTemperatures[i];
+		
+		if (temp < -10)
+		{
+			temp = -10;
+		}
+		else if (temp > 40)
+		{
+			temp = 40;
+		}
+		
+		tft.drawPixel(22 + i, 50 + 40 - temp, getColor(180, 180, 240));
+	}
+	
+	tft.fillRect(410, 60, 70, 30, getGrayScaleColor(0));
+	
+	tft.setFreeFont(FSS12);
+	tft.setTextSize(1);
+
+	tft.setTextColor(getGrayScaleColor(250));  
+	tft.drawString(String(data.getTemperature1(), 1).c_str(), 410, 63, 1);
+	
+	tft.setFreeFont(FSS9);
+	tft.drawString("C", 460, 67, 1);
+	
+}
+
+void Display::drawCurrentWeather(const WeatherData& data)
 {
   // Clear background
   tft.fillRect(20, 120, WIDTH, 95, TFT_BLACK);
@@ -93,20 +180,17 @@ void Display::drawCurrentWeather(WeatherData data)
   tft.fillRect(20, 120, 64, 64, TFT_CYAN);
 
   // Draw Current temperature
-  
   tft.setTextColor(TFT_WHITE, TFT_BLACK);  
   tft.setFreeFont(FSSB24);
   tft.setTextSize(1);
   tft.drawString("20 C", 100, 135, 1);
 
   // Draw state message
-
   tft.setFreeFont(FSS9);
   tft.setTextSize(1);
   tft.drawString("Rain showers and heavy thunderstorms", 20, 195, 1);
 
   // Draw min and max temperatures
-
   tft.setFreeFont(FSS12);
   tft.setTextSize(1);
 
@@ -118,7 +202,7 @@ void Display::drawCurrentWeather(WeatherData data)
   
 }
 
-void Display::drawForecastWeather(WeatherData data)
+void Display::drawForecastWeather(const WeatherData& data)
 {
   // Clear background
   tft.fillRect(20, HEIGHT - 90, WIDTH, 95, TFT_BLACK);
@@ -152,17 +236,24 @@ void Display::drawForecastWeather(WeatherData data)
 
 }
 
-void Display::drawDateAndTime(ClockData data)
+void Display::drawDateAndTime(const ClockData& data)
 {
+  tft.fillRect(230, 4, WIDTH, 27, getColor(180, 180, 200));
 
-  tft.fillRect(220, 7, WIDTH, 20, getColor(160, 160, 160));
+  tft.setFreeFont(FSS18);
+  tft.setTextSize(1);
+
+  tft.setTextColor(tft.color565(240, 240, 240));  
+  tft.drawString(data.getTimeString().c_str(), 385, 5, 1);
+  
+  tft.setTextColor(tft.color565(60, 60, 60));  
+  tft.drawString(data.getDayMonthString().c_str(), 230, 6, 1);
 
   tft.setFreeFont(FSS12);
   tft.setTextSize(1);
 
-  tft.setTextColor(tft.color565(240, 240, 240));  
-  tft.drawString(data.getDateString().c_str(), 220, 7, 1);
-  
+  tft.setTextColor(tft.color565(40, 40, 40));  
+  tft.drawString(data.getYearString().c_str(), 320, 12, 1);
 }
 
 void Display::draw()

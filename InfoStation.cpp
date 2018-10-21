@@ -9,6 +9,11 @@ void InfoStation::run()
   Serial.println("Reading sensors...");
   this->sensors.update();
   SensorData data = this->sensors.getData();
+  this->history.registerTemperature(data);
+  
+  this->display.drawAtmosphericPressure(data);
+  this->display.drawHumidity(data);
+  this->display.drawTemperature(history, data);
   
   logInfo("Temperature1= ");
   
@@ -28,7 +33,7 @@ void InfoStation::run()
   
   ClockData clockData = this->rtc.getData();
   this->display.drawDateAndTime(clockData);
-  
+    
   Serial.print("Year= ");
   Serial.print(clockData.getYear());
   Serial.print(" Month= ");
