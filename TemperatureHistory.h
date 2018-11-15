@@ -4,7 +4,7 @@
 #include "Sensors.h"
 
 #define HISTORY_POINTS 360
-#define MOV_AVG_POINTS 1
+#define MOV_AVG_POINTS 30
 
 class TemperatureHistory
 {
