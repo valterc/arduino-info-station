@@ -17,8 +17,8 @@ void Display::initStaticParts()
 {
    tft.fillRect(0, 0, WIDTH, 40, getColor(180, 180, 200));
    
-   Images::renderHumidityImage(tft, 4, 13);
-   Images::renderPressureImage(tft, 135, 9);
+   Images::renderHumidityImage(tft, 133, 12);
+   Images::renderPressureImage(tft, 4, 8);
 
    tft.drawFastVLine(21, 50, 50, getGrayScaleColor(0xAA));
    tft.drawFastHLine(21, 90, 360, getGrayScaleColor(0xAA));
@@ -173,6 +173,7 @@ void Display::drawTemperature(const TemperatureHistory& history, const SensorDat
 
 void Display::drawCurrentWeather(const WeatherData& data)
 {
+	return;
   // Clear background
   tft.fillRect(20, 120, WIDTH, 95, TFT_BLACK);
   
@@ -204,6 +205,7 @@ void Display::drawCurrentWeather(const WeatherData& data)
 
 void Display::drawForecastWeather(const WeatherData& data)
 {
+	return;
   // Clear background
   tft.fillRect(20, HEIGHT - 90, WIDTH, 95, TFT_BLACK);
   
@@ -238,7 +240,7 @@ void Display::drawForecastWeather(const WeatherData& data)
 
 void Display::drawDateAndTime(const ClockData& data)
 {
-  tft.fillRect(230, 4, WIDTH, 27, getColor(180, 180, 200));
+  tft.fillRect(230, 4, WIDTH, 28, getColor(180, 180, 200));
 
   tft.setFreeFont(FSS18);
   tft.setTextSize(1);
