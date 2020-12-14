@@ -27,16 +27,16 @@ Wifi::Wifi() : esp(Serial1)
 		logInfoLine("To station + softap err")
 	}
 	
-    if (esp.joinAP(WIFI_SSID, WIFI_PASSWORD)) 
+  if (esp.joinAP(WIFI_SSID, WIFI_PASSWORD)) 
 	{
         logInfoLine("Join AP success")
         logInfo("IP:")
         appendLogInfoLine(esp.getLocalIP().c_str())     
-    } 
+  } 
 	else 
 	{
         logInfoLine("Join AP failure")
-    }
+  }
   
 }
 

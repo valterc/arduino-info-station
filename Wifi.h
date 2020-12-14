@@ -13,7 +13,7 @@
 #define WIFI_PIN_EN    9
 
 #define WEATHER_API_CURRENT_WEATHER "http://api.openweathermap.org/data/2.5/weather?id=6458783&units=metric&appid="
-#define WEATHER_API_FORECAST		"http://api.openweathermap.org/data/2.5/forecast?id=6458783&units=metric&appid="
+#define WEATHER_API_FORECAST		    "http://api.openweathermap.org/data/2.5/forecast?id=6458783&units=metric&appid="
 
 class Wifi
 {
