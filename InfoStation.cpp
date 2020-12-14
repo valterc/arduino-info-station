@@ -17,15 +17,15 @@ void InfoStation::run()
   
   logInfo("Temperature1= ");
   
-  //Serial.print("Temperature1= ");
+  //Serial.print("Temperature1=");
   Serial.print(data.getTemperature1());
-  Serial.print(" Temperature2= ");
+  Serial.print(" Temperature2=");
   Serial.print(data.getTemperature2());
-  Serial.print(" HeatIndex= ");
+  Serial.print(" HeatIndex=");
   Serial.print(data.getHeatIndex());
-  Serial.print(" Pressure= ");
+  Serial.print(" Pressure=");
   Serial.print(data.getPressure());
-  Serial.print(" Humidity= ");
+  Serial.print(" Humidity=");
   Serial.println(data.getHumidity());
   
   Serial.println("Reading RTC...");
@@ -34,20 +34,19 @@ void InfoStation::run()
   ClockData clockData = this->rtc.getData();
   this->display.drawDateAndTime(clockData);
     
-  Serial.print("Year= ");
+  Serial.print("Year=");
   Serial.print(clockData.getYear());
-  Serial.print(" Month= ");
+  Serial.print(" Month=");
   Serial.print(clockData.getMonth());
-  Serial.print(" Day= ");
+  Serial.print(" Day=");
   Serial.print(clockData.getDay());
-  Serial.print(" Hour= ");
+  Serial.print(" Hour=");
   Serial.print(clockData.getHour());
-  Serial.print(" Minute= ");
+  Serial.print(" Minute=");
   Serial.println(clockData.getMinute());
   
   Serial.print("Date as String: ");
   Serial.println(clockData.getDateString());
   
-  delay(2000);
+  delay(1000);
 }
-
