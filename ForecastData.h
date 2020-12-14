@@ -7,13 +7,13 @@
 class ForecastData : WeatherData
 {
   private:
-    
+    String date;
 
   public:
-
-	String date;
-  
     ForecastData();
+	
+	String& getDateString();
+	
 
 };
 

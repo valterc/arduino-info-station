@@ -27,8 +27,8 @@ class Wifi
 	
 	void update(ClockData clockData);
 	
-	WeatherData getWeatherData();
-	ForecastData getForecastData();
+	WeatherData& getWeatherData();
+	ForecastData& getForecastData();
 	
 };
 

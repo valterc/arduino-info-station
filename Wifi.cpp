@@ -45,12 +45,12 @@ void Wifi::update(ClockData clockData)
 	
 }
 	
-WeatherData Wifi::getWeatherData()
+WeatherData& Wifi::getWeatherData()
 {
 	
 }
 
-ForecastData Wifi::getForecastData()
+ForecastData& Wifi::getForecastData()
 {
 	
 }	
