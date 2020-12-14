@@ -9,8 +9,13 @@ TemperatureHistory::TemperatureHistory()
 void TemperatureHistory::registerTemperature(const SensorData& data)
 {
 	movAvg[indexMovAvg++] = data.getTemperature1();
-	
-	if (indexHistory != 0 || indexMovAvg == MOV_AVG_POINTS)
+
+  if (indexHistory != 0)
+  {
+    updateHistory(movAvg[indexMovAvg - 1]);
+    indexMovAvg = 0;
+  }
+  else if (indexMovAvg == MOV_AVG_POINTS)
 	{
 		float tempSum = 0;
 		
