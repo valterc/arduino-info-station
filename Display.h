@@ -1,17 +1,17 @@
 #ifndef Display_h
 #define Display_h
 
-#include <TFT_HX8357.h>
 #include "WeatherData.h"
 #include "ClockData.h"
 #include "SensorData.h"
 #include "Images.h"
 #include "TemperatureHistory.h"
 
-#include <Fonts/GFXFF/FreeSansBold24pt7b.h>
-#include <Fonts/GFXFF/FreeSans9pt7b.h>
-#include <Fonts/GFXFF/FreeSans12pt7b.h>
-#include <Fonts/GFXFF/FreeSans18pt7b.h>
+#include "src/TFT_HX8357/TFT_HX8357.h"
+#include "src/TFT_HX8357/fonts/GFXFF/FreeSansBold24pt7b.h"
+#include "src/TFT_HX8357/fonts/GFXFF/FreeSans9pt7b.h"
+#include "src/TFT_HX8357/fonts/GFXFF/FreeSans12pt7b.h"
+#include "src/TFT_HX8357/fonts/GFXFF/FreeSans18pt7b.h"
 
 #define FSSB24 &FreeSansBold24pt7b
 #define FSS9 &FreeSans9pt7b

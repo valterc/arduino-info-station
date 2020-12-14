@@ -1,6 +1,8 @@
 #ifndef Images_h
 #define Images_h
 
+#include "src/TFT_HX8357/TFT_HX8357.h"
+
 class Images
 {
 public:
