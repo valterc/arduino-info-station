@@ -9,28 +9,27 @@ SensorData::SensorData(float temperature1, float temperature2, float heatIndex, 
 {
 }
 
-float SensorData::getTemperature1()
+float SensorData::getTemperature1() const
 {
   return this->temperature1;
 }
 
-float SensorData::getTemperature2()
+float SensorData::getTemperature2() const
 {
   return this->temperature2;
 }
 
-float SensorData::getHeatIndex()
+float SensorData::getHeatIndex() const
 {
   return this->heatIndex;
 }
 
-float SensorData::getPressure()
+float SensorData::getPressure() const
 {
   return this->pressure;
 }
 
-float SensorData::getHumidity()
+float SensorData::getHumidity() const
 {
   return this->humidity;
 }
-

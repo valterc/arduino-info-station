@@ -16,17 +16,17 @@ class ClockData
   public:
     ClockData();
     ClockData(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second);
-    uint16_t getYear();
-    uint8_t getMonth();
-    uint8_t getDay();
-    uint8_t getHour();
-    uint8_t getMinute();
-    uint8_t getSecond();
+    uint16_t getYear() const;
+    uint8_t getMonth() const;
+    uint8_t getDay() const;
+    uint8_t getHour() const;
+    uint8_t getMinute() const;
+    uint8_t getSecond() const;
 
-    String getDateString();
-	String getDayMonthString();
-	String getYearString();
-    String getTimeString();
+    String getDateString() const;
+	  String getDayMonthString() const;
+	  String getYearString() const;
+    String getTimeString() const;
     
 };
 

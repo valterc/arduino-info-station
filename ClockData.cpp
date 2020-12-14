@@ -14,37 +14,37 @@ ClockData::ClockData(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, ui
   this->second = second;
 }
 
-uint16_t ClockData::getYear()
+uint16_t ClockData::getYear() const
 {
   return this->year;
 }
 
-uint8_t ClockData::getMonth()
+uint8_t ClockData::getMonth() const
 {
   return this->month;
 }
 
-uint8_t ClockData::getDay()
+uint8_t ClockData::getDay() const
 {
   return this->day;
 }
 
-uint8_t ClockData::getHour()
+uint8_t ClockData::getHour() const
 {
   return this->hour;
 }
 
-uint8_t ClockData::getMinute()
+uint8_t ClockData::getMinute() const
 {
   return this->minute;
 }
 
-uint8_t ClockData::getSecond()
+uint8_t ClockData::getSecond() const
 {
   return this->second;
 }
 
-String ClockData::getDateString()
+String ClockData::getDateString() const
 {
   String date = String();
 
@@ -69,7 +69,7 @@ String ClockData::getDateString()
   return date;
 }
 
-String ClockData::getDayMonthString()
+String ClockData::getDayMonthString() const
 {
   String date = String();
 
@@ -91,12 +91,12 @@ String ClockData::getDayMonthString()
   return date;
 }
 
-String ClockData::getYearString()
+String ClockData::getYearString() const
 { 
   return String(this->year);
 }
 
-String ClockData::getTimeString()
+String ClockData::getTimeString() const
 {
   String time = String();
 
@@ -117,5 +117,3 @@ String ClockData::getTimeString()
  
   return time;
 }
-
-

@@ -15,11 +15,11 @@ class SensorData
     SensorData();
     SensorData(float temperature1, float temperature2, float heatIndex, float pressure, float humidity);
 
-    float getTemperature1();
-    float getTemperature2();
-    float getHeatIndex();
-    float getPressure();
-    float getHumidity();
+    float getTemperature1() const;
+    float getTemperature2() const;
+    float getHeatIndex() const;
+    float getPressure() const;
+    float getHumidity() const;
 
 };
 
