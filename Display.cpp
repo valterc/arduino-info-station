@@ -20,17 +20,16 @@ void Display::initStaticParts()
    Images::renderHumidityImage(tft, 133, 12);
    Images::renderPressureImage(tft, 4, 8);
 
-   tft.drawFastVLine(21, 50, 50, getGrayScaleColor(0xAA));
-   tft.drawFastHLine(21, 90, 360, getGrayScaleColor(0xAA));
+   tft.drawFastVLine(22, 45, 105, getGrayScaleColor(0xAA));
    
    tft.setTextColor(getGrayScaleColor(0xAA)); 
    tft.setFreeFont(FSS9);
    tft.setTextSize(1);
 
-   tft.drawString("40", 0, 45, 1);
-   tft.drawString("0", 10, 80, 1);
+   tft.drawString("30", 1, 45, 1);
+   tft.drawString("0", 11, 115, 1);
    
-   Images::renderThermometerImage(tft, 390, 60);
+   Images::renderThermometerImage(tft, 390, 80);
    
 /*
    for (uint16_t i = 0 ; i <= 255 ; i += 1)
@@ -131,17 +130,20 @@ void Display::drawHumidity(const SensorData& data)
 
 void Display::drawTemperature(const TemperatureHistory& history, const SensorData& data)
 {
-	tft.fillRect(22, 50, 360, 50, getGrayScaleColor(0));
+	tft.fillRect(23, 40, 360, 100, getGrayScaleColor(0));
 	
-	tft.drawFastHLine(22, 60, 360, getGrayScaleColor(0x44));
-	tft.drawFastHLine(22, 70, 360, getGrayScaleColor(0x44));
-	tft.drawFastHLine(22, 80, 360, getGrayScaleColor(0x44));
-	
-	tft.drawFastHLine(21, 90, 360, getGrayScaleColor(0xAA));
+	tft.drawFastHLine(23, 60, 360, getGrayScaleColor(0x44));
+	tft.drawFastHLine(23, 80, 360, getGrayScaleColor(0x44));
+	tft.drawFastHLine(23, 100, 360, getGrayScaleColor(0x44));
+	tft.drawFastHLine(23, 140, 360, getGrayScaleColor(0x44));
+ 
+	tft.drawFastHLine(22, 120, 360, getGrayScaleColor(0xAA));
 	
 	const int& index = history.getHistoryIndex();
 	const float* historyTemperatures = history.getHistory();
-	
+
+  float lastTemp = -40;
+  
 	for (int i = index ; i < HISTORY_POINTS ; ++i)
 	{
 		float temp = historyTemperatures[i];
@@ -154,20 +156,29 @@ void Display::drawTemperature(const TemperatureHistory& history, const SensorDat
 		{
 			temp = 40;
 		}
-		
-		tft.drawPixel(22 + i, 50 + 40 - temp, getColor(180, 180, 240));
+
+    if (lastTemp != -40)
+    {
+      tft.drawLine(23 + i - 1, 40 + 80 - lastTemp * 2, 23 + i, 40 + 80 - temp * 2, getColor(240, 120, 120));
+    }
+    else
+    {
+      tft.drawPixel(23 + i, 40 + 80 - temp * 2, getColor(240, 120, 120));
+    }
+
+    lastTemp = temp;
 	}
 	
-	tft.fillRect(410, 60, 70, 30, getGrayScaleColor(0));
+	tft.fillRect(410, 80, 90, 30, getGrayScaleColor(0));
 	
 	tft.setFreeFont(FSS12);
 	tft.setTextSize(1);
 
 	tft.setTextColor(getGrayScaleColor(250));  
-	tft.drawString(String(data.getTemperature1(), 1).c_str(), 410, 63, 1);
+	tft.drawString(String(data.getTemperature1(), 1).c_str(), 410, 83, 1);
 	
 	tft.setFreeFont(FSS9);
-	tft.drawString("C", 460, 67, 1);
+	tft.drawString("C", 460, 87, 1);
 	
 }
 
