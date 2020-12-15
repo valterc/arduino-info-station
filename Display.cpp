@@ -17,7 +17,7 @@ void Display::initStaticParts()
 {
    tft.fillRect(0, 0, WIDTH, 40, getColor(180, 180, 200));
    
-   Images::renderHumidityImage(tft, 133, 12);
+   Images::renderHumidityImage(tft, 136, 12);
    Images::renderPressureImage(tft, 4, 8);
 
    tft.drawFastVLine(22, 45, 105, getGrayScaleColor(0xAA));
@@ -103,7 +103,7 @@ void Display::drawAtmosphericPressure(const SensorData& data)
   tft.setTextSize(1);
   
   uint8_t x = 82;
-  if (data.getPressure() > 1000)
+  if (pressure.length() > 5)
   {
      x = 95;
   }
@@ -113,19 +113,19 @@ void Display::drawAtmosphericPressure(const SensorData& data)
 
 void Display::drawHumidity(const SensorData& data)
 {
-  tft.fillRect(150, 6, 65, 27, getColor(180, 180, 200));
+  tft.fillRect(153, 6, 65, 27, getColor(180, 180, 200));
   tft.setTextColor(tft.color565(240, 240, 240));  
 
   tft.setFreeFont(FSS12);
   tft.setTextSize(1);
 
-  String pressure = String(data.getHumidity(), 1);
-  tft.drawString(pressure.c_str(), 150, 10, 1);
+  String humidity = String(data.getHumidity(), 1);
+  tft.drawString(humidity.c_str(), 153, 10, 1);
   
   tft.setFreeFont(FSS9);
   tft.setTextSize(1);
     
-  tft.drawString("%", 196, 15, 1);
+  tft.drawString("%", 199, 15, 1);
 }
 
 void Display::drawTemperature(const TemperatureHistory& history, const SensorData& data)
@@ -266,7 +266,7 @@ void Display::drawDateAndTime(const ClockData& data)
   tft.setTextSize(1);
 
   tft.setTextColor(tft.color565(40, 40, 40));  
-  tft.drawString(data.getYearString().c_str(), 320, 12, 1);
+  tft.drawString(data.getYearString().c_str(), 320, 13, 1);
 }
 
 void Display::draw()
