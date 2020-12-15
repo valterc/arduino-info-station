@@ -145,8 +145,6 @@ void TFT_HX8357::presentBuffer()
 			size -= dSize;
 		}
 		
-		
-		
 		backbuffer = NULL;
 	}
 }
